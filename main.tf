@@ -671,6 +671,14 @@ resource "azurerm_virtual_network_gateway_connection" "to-onprem" {
   type                       = "IPsec"
   virtual_network_gateway_id = azurerm_virtual_network_gateway.azurevpngw.id
   enable_bgp = true
+  ipsec_policy {
+    dh_group = "DHGroup14"
+    ike_encryption = "AES256"
+    ike_integrity = "SHA1"
+    ipsec_encryption = "AES256"
+    ipsec_integrity = "SHA1"
+    pfs_group = "None"
+  }
   timeouts {
     create = "2h"
     read = "2h"
@@ -966,7 +974,7 @@ crypto ikev2 enable management
 crypto ikev2 policy 50
  encryption aes-256
  integrity sha
- group 2
+ group 14
  prf sha
  lifetime seconds 86400
 
