@@ -534,7 +534,7 @@ resource "azurerm_network_security_rule" "asasshnsgrule1" {
   destination_port_range      = "22"
   direction                   = "Inbound"
   name                        = "AllowCidrBlockSSHInbound"
-  network_security_group_name = "onprem-ssh-default-nsg"
+  network_security_group_name = azurerm_network_security_group.asasshnsg.name
   priority                    = 100
   protocol                    = "Tcp"
   resource_group_name         = azurerm_network_security_group.onpremvnetNSG.resource_group_name
@@ -1024,3 +1024,4 @@ route vpntunnel ${azurerm_virtual_network_gateway.azurevpngw.bgp_settings[0].pee
 
 CUSTOM_DATA  
 }
+
